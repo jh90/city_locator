@@ -17,9 +17,6 @@
     "url": "https://github.com/jh90/city_locator/issues"
   },
   "homepage": "https://github.com/jh90/city_locator#readme",
-  "devDependencies": {
-    "webpack-cli": "^3.0.8"
-  },
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
