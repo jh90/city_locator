@@ -18,8 +18,7 @@ export default class App extends React.Component {
     render () {
         return (
             <div>
-                <Search onSubmit={this.handleSubmit} />
-                <Results />
+                HEY you
             </div>
         );
     }
