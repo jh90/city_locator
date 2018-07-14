@@ -1,0 +1,19 @@
+{
+  "name": "city_locator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jh90/city_locator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jh90/city_locator/issues"
+  },
+  "homepage": "https://github.com/jh90/city_locator#readme"
+}
