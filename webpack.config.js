@@ -9,7 +9,7 @@ module.exports = {
     port: 8080,
   },
   output: {
-    path: path.join(__dirname, 'src', 'static', 'js'),
+    path: path.join(__dirname),
     filename: 'bundle.js',
   },
   mode: 'none',

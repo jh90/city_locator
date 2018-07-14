@@ -10,7 +10,7 @@ export default class Results extends React.Component {
 
     render () {
         return (
-            <h1>RESULTSSSSS</h1>
+            <div>RESULTS</div>
         );
     }
 }

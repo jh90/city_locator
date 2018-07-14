@@ -7,18 +7,21 @@ export default class App extends React.Component {
     constructor () {
         super();
         this.state = {
-            city_input: '',
+            searchInput: '',
         };
     }
 
-    handleSubmit () {
-
+    handleSubmit (input) {
+        this.setState({ searchInput: input, });
     }
 
     render () {
         return (
             <div>
-                HEY you
+                <Search 
+                    onSubmit={this.handleSubmit} />
+                <Results 
+                    query={this.state.searchInput} />
             </div>
         );
     }
