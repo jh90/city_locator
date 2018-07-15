@@ -1,5 +1,4 @@
 import React from 'react';
-
 import SearchView from './search_view.jsx';
 
 export default class Search extends React.Component {
@@ -12,7 +11,7 @@ export default class Search extends React.Component {
     }
 
     handleChange (value) {
-
+        
     }
 
     handleSubmit (value) {
