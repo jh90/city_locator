@@ -5,18 +5,19 @@ const SearchView = (props) => {
     return (
         <div>
             <ReactAutocomplete 
-                items={[1,2,3]}
+                items={props.suggestions}
                 getItemValue={item => item}
                 renderItem={(item, highlighted) =>
                     <div style={{ background: highlighted ? 'lightgray' : 'white' }}>
                       {item}
                     </div>
                 }
+                autoHighlight={false}
                 value={props.input}
-                onChange={(e) => props.change(e.target.value)}
-                onSelect={(val) => props.submit(val)}
+                onChange={(e) => props.handleChange(e.target.value)}
+                onSelect={(val) => props.handleSubmit(val)}
             />
-            <button onClick={props.submit}>Search</button>
+            <button onClick={props.handleSubmit}>Search</button>
         </div>
     );
 }

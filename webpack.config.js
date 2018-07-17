@@ -2,14 +2,14 @@ const path = require('path');
 
 module.exports = {
   devtool: 'source-map',
-  entry: path.join(__dirname, 'src', 'index.jsx'),
+  entry: path.join(__dirname, 'client', 'index.jsx'),
   devServer: {
-    contentBase: path.join(__dirname, 'src', 'static'),
+    contentBase: path.join(__dirname, 'static'),
     inline: true,
     port: 8080,
   },
   output: {
-    path: path.join(__dirname),
+    path: path.join(__dirname, 'static', 'js'),
     filename: 'bundle.js',
   },
   mode: 'none',
