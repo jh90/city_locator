@@ -7,8 +7,9 @@ const app = express();
 
 app.use(morgan('dev'));
 
+app.use(express.static(path.join(__dirname, '/dist')));
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'static/index.html'));
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
 app.get('/dir', (req, res) => {
@@ -22,8 +23,7 @@ app.get('/dir', (req, res) => {
     });
 });
 
-const port = 8080;
-
+const port = 8008;
 app.listen(port, () => {
-  console.log(`Listening on 3000`);
+  console.log(`Listening on 8008`);
 });
