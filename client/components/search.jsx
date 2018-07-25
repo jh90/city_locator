@@ -8,14 +8,18 @@ export default class Search extends React.Component {
             input: '',
             suggestions: [],
         };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     getSuggestions (input) {
-        fetch(`localhost:8080/dist?${input}`)
+        fetch(`http://localhost:8008/dir/?input=${input}`)
         .then(res => {
+            console.log('return');
             return res.json();
         })
         .then(data => {
+            console.log('show');
             console.log(data.body);
         });
     }
@@ -32,7 +36,8 @@ export default class Search extends React.Component {
 
     render () {
         return (
-            <SearchView suggestions={this.state.suggestions}
+            <SearchView input={this.state.input}
+                        suggestions={this.state.suggestions}
                         handleSubmit={this.handleSubmit}
                         handleChange={this.handleChange} 
                         />
