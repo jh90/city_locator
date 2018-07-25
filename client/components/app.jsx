@@ -12,7 +12,9 @@ export default class App extends React.Component {
     }
 
     handleSubmit (value) {
+        console.log(value);
         this.setState({ searchInput: value, });
+        console.log(this.state.searchInput);
     }
 
     render () {

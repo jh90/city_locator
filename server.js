@@ -1,17 +1,17 @@
-const path = require('path');
 const express = require('express');
+const postgres = require('./db/psql');
 const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const config = require('./webpack.config');
+const webpackConfig = require('./webpack.config');
+const path = require('path');
 const morgan = require('morgan');
-const postgres = require('./dist/js/psql');
 
 const app = express();
 
 app.use(morgan('dev'));
 
-const compiler = webpack(config);
+const compiler = webpack(webpackConfig);
 const middleware = webpackMiddleware(compiler, {
     stats: {
       colors: true,

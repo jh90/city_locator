@@ -34,8 +34,10 @@ export default class Search extends React.Component {
     }
 
     handleSubmit (value) {
-        value = value || this.state.input;
-        this.props.handleSubmit(value);
+        console.log(value);
+        const search = value || this.state.input;
+        console.log(search);
+        this.props.handleSubmit(search);
     }
 
     render () {
