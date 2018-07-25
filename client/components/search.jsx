@@ -10,23 +10,27 @@ export default class Search extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.getSuggestions = this.getSuggestions.bind(this);
     }
 
     getSuggestions (input) {
         fetch(`http://localhost:8008/dir/?input=${input}`)
-        .then(res => {
-            console.log('return');
-            return res.json();
+        .then((response) => {
+            return response.json();
         })
-        .then(data => {
-            console.log('show');
-            console.log(data.body);
+        .then((data) => {
+            console.log(data);
+            const cleanData = data.map((match) => {
+                const cleanSuggestion = `${match.alias} ${match.state_short}`;
+                return cleanSuggestion;
+            });
+            this.setState({ suggestions: cleanData, });
         });
     }
 
     handleChange (value) {
         this.setState({ input: value, });
-        this.getSuggestions(value);
+        value.length > 2 ? this.getSuggestions(value) : false;
     }
 
     handleSubmit (value) {

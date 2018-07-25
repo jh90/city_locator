@@ -5,7 +5,7 @@ const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config');
 const morgan = require('morgan');
-const db = require('./app/db');
+const postgres = require('./dist/js/psql');
 
 const app = express();
 
@@ -28,12 +28,8 @@ app.get('/', (req, res) => {
 
 app.get('/dir', (req, res) => {
     const { input } = req.query;
-    const queryString = {
-        text: 'SELECT alias FROM us_cities WHERE alias=$1 LIMIT 10;',
-        values: [`${input}*`],
-    };
-    db.any(queryString).then(rows => {
-        res.send(rows);
+    postgres.suggest(input).then((rows) => {
+        res.status(200).json(rows);
     });
 });
 
