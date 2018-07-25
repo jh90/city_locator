@@ -1,8 +1,8 @@
-import { Component } from 'react';
+import React from 'react';
 import Search from './search.jsx';
 import Results from './results.jsx';
 
-export default class App extends Component {
+export default class App extends React.Component {
     constructor () {
         super();
         this.state = {

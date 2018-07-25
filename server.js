@@ -1,11 +1,25 @@
 const path = require('path');
 const express = require('express');
+const webpack = require('webpack');
+const webpackMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const config = require('./webpack.config');
 const morgan = require('morgan');
 const db = require('./app/db');
 
 const app = express();
 
 app.use(morgan('dev'));
+
+const compiler = webpack(config);
+const middleware = webpackMiddleware(compiler, {
+    stats: {
+      colors: true,
+      chunks: false,
+    },
+  });
+app.use(middleware);
+app.use(webpackHotMiddleware(compiler));
 
 app.use(express.static(path.join(__dirname, '/dist')));
 app.get('/', (req, res) => {
