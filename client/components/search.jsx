@@ -14,7 +14,7 @@ export default class Search extends React.Component {
     }
 
     getSuggestions (value) {
-        fetch(`http://localhost:8008/dir/?srchin=${value}`)
+        fetch(`http://localhost:8008/dir/?input=${value}%`)
         .then((res) => {
             return res.json();
         })
@@ -32,8 +32,8 @@ export default class Search extends React.Component {
     }
 
     handleSubmit () {
-        this.props.handleSubmit(this.state.input);
-        this.setState({ input: '', });
+        this.props.handleSubmit(`${this.state.input}%`);
+        this.setState({ input: '', })
     }
 
     render () {

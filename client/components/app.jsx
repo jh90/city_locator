@@ -7,7 +7,6 @@ export default class App extends React.Component {
         super();
         this.state = {
             searchInput: null,
-            showResults: false,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -16,18 +15,11 @@ export default class App extends React.Component {
         this.setState({ searchInput: val, });
     }
 
-    toggleResultsMenu (val) {
-        this.setState({ showResults: val, });
-    }
-
     render () {
-        const toggle = this.state.showResults;
         return (
             <div>
                 <Search handleSubmit={this.handleSubmit} />
-                {
-                    toggle ? <Results search={this.state.searchInput} show={this.toggleResultsMenu} /> : false
-                }
+                <Results search={this.state.searchInput} />
             </div>
         );
     }

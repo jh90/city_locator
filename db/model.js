@@ -1,7 +1,5 @@
 class City {
-    constructor ({ id, name, state_short, state_long, alias }) {
-        this.id = id;
-        this.name = name;
+    constructor ({ state_short, state_long, alias }) {
         this.state_short = state_short;
         this.state_long = state_long;
         this.alias = alias;
