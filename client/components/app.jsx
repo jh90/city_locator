@@ -6,22 +6,28 @@ export default class App extends React.Component {
     constructor () {
         super();
         this.state = {
-            searchInput: '',
+            searchInput: null,
+            showResults: false,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit (value) {
-        console.log(value);
-        this.setState({ searchInput: value, });
-        console.log(this.state.searchInput);
+    handleSubmit (val) {
+        this.setState({ searchInput: val, });
+    }
+
+    toggleResultsMenu (val) {
+        this.setState({ showResults: val, });
     }
 
     render () {
+        const toggle = this.state.showResults;
         return (
             <div>
                 <Search handleSubmit={this.handleSubmit} />
-                <Results searchInput={this.state.searchInput} />
+                {
+                    toggle ? <Results search={this.state.searchInput} show={this.toggleResultsMenu} /> : false
+                }
             </div>
         );
     }

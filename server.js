@@ -27,10 +27,17 @@ app.get('/', (req, res) => {
 });
 
 app.get('/dir', (req, res) => {
-    const { input } = req.query;
-    postgres.suggest(input).then((rows) => {
+    const { query } = req;
+    if ( query.srchin ) {
+      postgres.getCities(query.srchin).then((rows) => {
+          res.status(200).json(rows);
+      });
+    }
+    else {
+      postgres.getStates(query.srchkey).then((rows) => {
         res.status(200).json(rows);
-    });
+      });
+    }
 });
 
 const port = 8008;

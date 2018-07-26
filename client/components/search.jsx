@@ -1,8 +1,8 @@
 import React from 'react';
-import SearchView from './search_view.jsx';
+import ReactAutocomplete from 'react-autocomplete';
 
 export default class Search extends React.Component {
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.state = {
             input: '',
@@ -13,16 +13,14 @@ export default class Search extends React.Component {
         this.getSuggestions = this.getSuggestions.bind(this);
     }
 
-    getSuggestions (input) {
-        fetch(`http://localhost:8008/dir/?input=${input}`)
-        .then((response) => {
-            return response.json();
+    getSuggestions (value) {
+        fetch(`http://localhost:8008/dir/?srchin=${value}`)
+        .then((res) => {
+            return res.json();
         })
-        .then((data) => {
-            console.log(data);
-            const cleanData = data.map((match) => {
-                const cleanSuggestion = `${match.alias} ${match.state_short}`;
-                return cleanSuggestion;
+        .then((cities) => {
+            const cleanData = cities.map((city) => {
+                return city.alias.slice(0, -1);
             });
             this.setState({ suggestions: cleanData, });
         });
@@ -33,20 +31,32 @@ export default class Search extends React.Component {
         value.length > 2 ? this.getSuggestions(value) : false;
     }
 
-    handleSubmit (value) {
-        console.log(value);
-        const search = value || this.state.input;
-        console.log(search);
-        this.props.handleSubmit(search);
+    handleSubmit () {
+        this.props.handleSubmit(this.state.input);
+        this.setState({ input: '', });
     }
 
     render () {
         return (
-            <SearchView input={this.state.input}
-                        suggestions={this.state.suggestions}
-                        handleSubmit={this.handleSubmit}
-                        handleChange={this.handleChange} 
-                        />
+            <div>
+                <ReactAutocomplete 
+                    items={this.state.suggestions}
+                    getItemValue={item => item}
+                    renderItem={(item, highlighted) =>
+                        <div style={{ background: highlighted ? 'lightgray' : 'white' }}>
+                          {item}
+                        </div>
+                    }
+                    autoHighlight={false}
+                    value={this.state.input}
+                    onChange={(e) => this.handleChange(e.target.value)}
+                    onSelect={(val) => {
+                         this.props.handleSubmit(val);
+                         this.setState({ input: '', });
+                    }}
+                />
+                <button onClick={this.handleSubmit}>Search</button>
+            </div>
         );
     }
 }
