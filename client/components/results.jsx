@@ -10,27 +10,33 @@ export default class Results extends React.Component {
         this.getResults = this.getResults.bind(this);
     }
 
-    componentDidUpdate () {
-        this.getResults();
+    componentWillReceiveProps (nextProps) {
+        const searchValue = nextProps.search;
+        this.getResults(searchValue);
     }
 
-    getResults () {
-        fetch(`http://localhost:8008/srch/?input=${this.props.search}`)
+    cleanResultData (array) {
+        const cities = array.map((city) => {
+            return `${city.alias} ${city.state_short}`;
+        });
+        let states = [];
+        array.forEach((city) => {
+            states = states.filter((state) => {
+                return state == city.state_long ? false : true;
+            });
+            states.push(city.state_long);
+        });
+        return { cities, states, };
+    }
+
+    getResults (value) {
+        fetch(`http://localhost:8008/srch/?input=${value}`)
         .then((res) => {
             return res.json();
         })
-        .then(async (data) => {
-            const cityArray = data.map((city) => {
-                return `${city.alias} ${city.state_short}`;
-            });
-            let stateArray = [];
-            await data.forEach((city) => {
-                stateArray = stateArray.filter((state) => {
-                    return state == city.state_long ? false : true;
-                });
-                stateArray.push(city.state_long);
-            });
-            this.setState({ cityResults: cityArray, stateResults: stateArray, });
+        .then((data) => {
+            const { cities, states } = this.cleanResultData(data);
+            this.setState({ cityResults: cities, stateResults: states, });
         });
     }
 
