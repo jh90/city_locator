@@ -49,7 +49,7 @@ input:focus {
 }
 
 .results-view {
-    margin-left: 5em;
+    margin-left: 2.8em;
     margin-top: 3em;
     display: inline-block;
     width: 95%;
@@ -60,13 +60,25 @@ input:focus {
 }
 
 .cities-display {
+    float: right;
+    margin-left: 2.5em;
+}
+
+.cities-header {
+    font-size: 1.8em;
+    color: whitesmoke;
+    margin-bottom: 1em;
+}
+
+.states-display {
     float: left;
     margin-right: 2.5em;
 }
 
-.states-display {
-    float: right;
-    margin-left: 2.5em;
+.states-header {
+    font-size: 1.8em;
+    color: whitesmoke;
+    margin-bottom: 1em;
 }
 
 .result {
@@ -74,9 +86,8 @@ input:focus {
     padding: 1em;
     margin: 1em 1em 1em 1em;
     background-color: rgba(115, 172, 150, 0.5);
-    /* border: solid black 1px; */
 }
 
-.city-result::focus {
-    outline: whitesmoke;
+.result.city-result:focus {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
