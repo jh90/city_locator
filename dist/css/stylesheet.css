@@ -33,6 +33,7 @@ input:focus {
     width: 25em;
     height: .8em;
     font-size: 1.2em;
+    color: white;
 }
 
 .search-wrapper input::placeholder {
@@ -45,4 +46,5 @@ input:focus {
     background-color: rgba(120, 135, 171, 0.7);
     font-size: 1em;
     padding: 0.3em;
+    color: white;
 }

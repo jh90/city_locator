@@ -33,11 +33,6 @@ export default class Search extends React.Component {
         });
     }
 
-    handleChange (value) {
-        this.setState({ input: value, });
-        value.length > 2 ? this.getSuggestions(value) : false;
-    }
-
     resetField () {
         this.setState( {
             input: '',
@@ -46,13 +41,15 @@ export default class Search extends React.Component {
         });
     }
 
+    handleChange (value) {
+        this.setState({ input: value, });
+        value.length > 0 ? this.getSuggestions(value)
+                         : this.resetField();
+    }
+
     handleSubmit (value) {
-        if ( typeof value == 'string' ) {
-            this.props.handleSubmit(value);
-        }
-        else {
-            this.props.handleSubmit(`${this.state.input}%`);
-        }
+        const search = (typeof value == 'string') ? value : `${this.state.input}%`;
+        this.props.handleSubmit(search);
         this.resetField();
     }
 
@@ -76,7 +73,8 @@ export default class Search extends React.Component {
                     getItemValue={item => item}
                     renderItem={(item, highlighted) =>
                         <div className="suggestion" 
-                             style={{ background: highlighted ? 'lightgray' : false }} >
+                             style={{ background: highlighted ? 'lightgrey' : false,  
+                                      color: highlighted ? 'blue' : false } } >
                           {item}
                         </div>
                     }
