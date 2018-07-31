@@ -1,4 +1,6 @@
 import React from 'react';
+import Cities from './cities_view.jsx';
+import States from './states_view.jsx';
 
 export default class Results extends React.Component {
     constructor(props) {
@@ -31,8 +33,8 @@ export default class Results extends React.Component {
 
     getResults (value) {
         fetch(`http://localhost:8008/srch/?input=${value}`)
-        .then((res) => {
-            return res.json();
+        .then((response) => {
+            return response.json();
         })
         .then((data) => {
             const { cities, states } = this.cleanResultData(data);
@@ -42,21 +44,9 @@ export default class Results extends React.Component {
 
     render () {
         return (
-            <div>
-                <ul>
-                    {
-                        this.state.cityResults.map((city) => {
-                            return (<li>{city}</li>);
-                        })
-                    }
-                </ul>
-                <ul>
-                    {
-                        this.state.stateResults.map((state) => {
-                            return (<li>{state}</li>);
-                        })
-                    }
-                </ul>
+            <div className="view results-view" >
+                <Cities results={this.state.cityResults } />
+                <States results={this.state.stateResults } />
             </div>
         );
     }

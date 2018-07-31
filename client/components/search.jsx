@@ -13,16 +13,20 @@ export default class Search extends React.Component {
         this.getSuggestions = this.getSuggestions.bind(this);
     }
 
+    cleanCityData (array) {
+        return array.map((city) => {
+            return city.alias.slice(0, -1);
+        });
+    }
+
     getSuggestions (value) {
         fetch(`http://localhost:8008/dir/?input=${value}%`)
         .then((res) => {
             return res.json();
         })
-        .then((cities) => {
-            const cleanData = cities.map((city) => {
-                return city.alias.slice(0, -1);
-            });
-            this.setState({ suggestions: cleanData, });
+        .then((data) => {
+            const cities = this.cleanCityData(data);
+            this.setState({ suggestions: cities, });
         });
     }
 
@@ -38,7 +42,7 @@ export default class Search extends React.Component {
 
     render () {
         return (
-            <div>
+            <div className="view search-view" >
                 <ReactAutocomplete 
                     items={this.state.suggestions}
                     getItemValue={item => item}
@@ -55,7 +59,7 @@ export default class Search extends React.Component {
                          this.setState({ input: '', });
                     }}
                 />
-                <button onClick={this.handleSubmit}>Search</button>
+                <button id="search-button" onClick={this.handleSubmit} >Search</button>
             </div>
         );
     }
