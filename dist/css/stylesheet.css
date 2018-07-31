@@ -3,10 +3,9 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
-.view {
-   margin-left: 5em;
-   margin-top: 3em; 
-   max-width: 100%;
+.search-view {
+    margin-left: 5em;
+    margin-top: 3em; 
 }
 
 .search-button {
@@ -47,4 +46,37 @@ input:focus {
     font-size: 1em;
     padding: 0.3em;
     color: white;
+}
+
+.results-view {
+    margin-left: 5em;
+    margin-top: 3em;
+    display: inline-block;
+    width: 95%;
+}
+
+.display {
+    width: 45%;
+}
+
+.cities-display {
+    float: left;
+    margin-right: 2.5em;
+}
+
+.states-display {
+    float: right;
+    margin-left: 2.5em;
+}
+
+.result {
+    color: whitesmoke;
+    padding: 1em;
+    margin: 1em 1em 1em 1em;
+    background-color: rgba(115, 172, 150, 0.5);
+    /* border: solid black 1px; */
+}
+
+.city-result::focus {
+    outline: whitesmoke;
 }

@@ -44,7 +44,7 @@ export default class Results extends React.Component {
 
     render () {
         return (
-            <div className="view results-view" >
+            <div className="results-view" >
                 <Cities results={this.state.cityResults } />
                 <States results={this.state.stateResults } />
             </div>

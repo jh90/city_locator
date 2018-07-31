@@ -59,7 +59,7 @@ export default class Search extends React.Component {
             boxShadow: 'none',
         };
         return (
-            <div className="view search-view" >
+            <div className="search-view" >
                 <Autocomplete 
                     inputProps={{
                         className: 'search-field',

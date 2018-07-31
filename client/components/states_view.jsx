@@ -1,13 +1,13 @@
 import React from 'react';
 
 const States = props => {
-    return <ul id="display states-display">
+    return <div className="display states-display">
         {
             props.results.map((result) => {
-                return (<li className="result state-result" >{result}</li>);
+                return (<div className="result state-result" >{result}</div>);
             })
         }
-    </ul>;
+    </div>;
 }
 
 export default States;

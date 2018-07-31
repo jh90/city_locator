@@ -1,13 +1,13 @@
 import React from 'react';
 
 const Cities = props => {
-    return <ul id="display cities-display">
+    return <div className="display cities-display">
         {
             props.results.map((result) => {
-                return (<li className="result city-result" >{result}</li>);
+                return (<div className="result city-result" >{result}</div>);
             })
         }
-    </ul>;
+    </div>;
 }
 
 export default Cities;
