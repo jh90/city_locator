@@ -19,7 +19,7 @@ export default class Results extends React.Component {
 
     cleanResultData (array) {
         const cities = array.map((city) => {
-            return `${city.alias} ${city.state_short}`;
+            return `${city.name} ${city.state_short}`;
         });
         let states = [];
         array.forEach((city) => {

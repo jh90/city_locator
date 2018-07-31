@@ -1,0 +1,48 @@
+body {
+    background-color: rgba(6, 21, 57, 1);
+    font-family: 'Lato', sans-serif;
+}
+
+.view {
+   margin-left: 5em;
+   margin-top: 3em; 
+   max-width: 100%;
+}
+
+.search-button {
+    float: left;
+    margin-right: 1em;
+    margin-top: 0.3em;
+    height: 3em;
+    width: 6em;
+    margin-left: 0.5em;
+    background-color: rgba(79, 97, 143, 1);
+    color: white;
+    padding: .2em;
+    font-size: 1em;
+    font-family: 'Lato', sans-serif;
+}
+
+input:focus {
+    outline: none;
+}
+
+.search-wrapper input {
+    padding: 1em 1em 1em 3em;
+    background-color: rgba(120, 135, 171, 0.6);
+    width: 25em;
+    height: .8em;
+    font-size: 1.2em;
+}
+
+.search-wrapper input::placeholder {
+    color: white;
+    font-family: 'Lato', sans-serif;
+    opacity: 0.55;
+}
+
+.suggestion {
+    background-color: rgba(120, 135, 171, 0.7);
+    font-size: 1em;
+    padding: 0.3em;
+}

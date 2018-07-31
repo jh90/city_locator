@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactAutocomplete from 'react-autocomplete';
+import Autocomplete from 'react-autocomplete';
 
 export default class Search extends React.Component {
     constructor (props) {
@@ -7,6 +7,7 @@ export default class Search extends React.Component {
         this.state = {
             input: '',
             suggestions: [],
+            dropdownOpen: false,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,7 +16,7 @@ export default class Search extends React.Component {
 
     cleanCityData (array) {
         return array.map((city) => {
-            return city.alias.slice(0, -1);
+            return city.name.slice(0, -1);
         });
     }
 
@@ -26,7 +27,9 @@ export default class Search extends React.Component {
         })
         .then((data) => {
             const cities = this.cleanCityData(data);
-            this.setState({ suggestions: cities, });
+            const gotResults = cities.length > 0;
+            this.setState({ suggestions: cities, 
+                            dropdownOpen: gotResults, });
         });
     }
 
@@ -35,31 +38,54 @@ export default class Search extends React.Component {
         value.length > 2 ? this.getSuggestions(value) : false;
     }
 
-    handleSubmit () {
-        this.props.handleSubmit(`${this.state.input}%`);
-        this.setState({ input: '', })
+    resetField () {
+        this.setState( {
+            input: '',
+            suggestions: [],
+            dropdownOpen: false,
+        });
+    }
+
+    handleSubmit (value) {
+        if ( typeof value == 'string' ) {
+            this.props.handleSubmit(value);
+        }
+        else {
+            this.props.handleSubmit(`${this.state.input}%`);
+        }
+        this.resetField();
     }
 
     render () {
+        const { input, suggestions, dropdownOpen } = this.state;
+        const dropdownStyles = {
+            boxShadow: 'none',
+        };
         return (
             <div className="view search-view" >
-                <ReactAutocomplete 
-                    items={this.state.suggestions}
+                <Autocomplete 
+                    inputProps={{
+                        className: 'search-field',
+                        placeholder: 'Locate a city',
+                        autoFocus: true,
+                    }}
+                    wrapperProps={{ className: 'search-wrapper', }}
+                    open={dropdownOpen}
+                    menuStyle={dropdownStyles}
+                    items={suggestions}
                     getItemValue={item => item}
                     renderItem={(item, highlighted) =>
-                        <div style={{ background: highlighted ? 'lightgray' : 'white' }}>
+                        <div className="suggestion" 
+                             style={{ background: highlighted ? 'lightgray' : false }} >
                           {item}
                         </div>
                     }
                     autoHighlight={false}
-                    value={this.state.input}
+                    value={input}
                     onChange={(e) => this.handleChange(e.target.value)}
-                    onSelect={(val) => {
-                         this.props.handleSubmit(val);
-                         this.setState({ input: '', });
-                    }}
+                    onSelect={(value) => this.handleSubmit(value)}
                 />
-                <button id="search-button" onClick={this.handleSubmit} >Search</button>
+                <button className="search-button" onClick={this.handleSubmit} >Search</button>
             </div>
         );
     }
